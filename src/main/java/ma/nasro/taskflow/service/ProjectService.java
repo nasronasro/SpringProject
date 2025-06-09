@@ -1,0 +1,14 @@
+package ma.nasro.taskflow.service;
+
+import org.springframework.stereotype.Service;
+
+import ma.nasro.taskflow.model.Project;
+
+@Service
+public interface ProjectService {
+
+    //create a new project
+    public void createProject(Project project);
+}
+
+ 

@@ -1,0 +1,22 @@
+/* Optional: Custom styles for form if needed */
+.card-dark-mode {
+    background-color: #212529; /* Dark background for card */
+    color: #e2e6ea; /* Light text color */
+}
+.form-control-dark {
+    background-color: #343a40; /* Darker background for input fields */
+    color: #e2e6ea; /* Light text color for input */
+    border-color: #495057; /* Darker border */
+}
+.form-control-dark::placeholder {
+    color: #adb5bd; /* Lighter placeholder text */
+}
+.form-control-dark:focus {
+    background-color: #3d444a; /* Slightly lighter on focus */
+    color: #ffffff;
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+.form-label {
+    color: #ced4da; /* Light color for labels */
+}
