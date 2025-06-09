@@ -115,4 +115,22 @@ public class ProjectController {
 
         return "redirect:/project-management/list";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteProject(@PathVariable("id") Long projectId, Model model) {
+        if (projectId == null || projectId <= 0) {
+            model.addAttribute("error", "Invalid project ID");
+            return "error";
+        }
+
+        Project project = projectService.findProjectById(projectId);
+        if (project == null) {
+            model.addAttribute("error", "Project not found");
+            return "error";
+        }
+
+        projectService.DeleteProject(projectId);
+
+        return "redirect:/project-management/list";
+    }
 }

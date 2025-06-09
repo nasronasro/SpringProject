@@ -64,5 +64,14 @@ public class ProjectServiceImpl implements ProjectService {
         }
         projectDao.save(project);
     }
-    
+    @Override
+    public void DeleteProject(Long id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("Project ID must be a positive number");
+        }
+        if (!projectDao.existsById(id)) {
+            throw new IllegalArgumentException("Project not found with ID: " + id);
+        }
+        projectDao.deleteById(id);
+    }
 }
