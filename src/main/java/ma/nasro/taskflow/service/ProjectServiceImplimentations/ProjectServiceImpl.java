@@ -1,6 +1,7 @@
 package ma.nasro.taskflow.service.ProjectServiceImplimentations;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,15 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
         return projectDao.findAll();
+    }
+
+    @Override
+    public Project findProjectById(Long id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("Project ID must be a positive number");
+        }
+        return projectDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Project not found with ID: " + id));
     }
 
     

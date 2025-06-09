@@ -1,10 +1,12 @@
 package ma.nasro.taskflow.dto;
 
 import java.util.List;
+import java.util.Optional;
 
 import ma.nasro.taskflow.model.Project;
 
 public class ProjectResponse {
+    private Long id;
     private String name;
     private String description;
     private String startDate;
@@ -13,6 +15,7 @@ public class ProjectResponse {
 
 
     public ProjectResponse ProjectToProjectResponse(Project project) {
+        this.setId(project.getId());
         this.setName(project.getName());
         this.setDescription(project.getDescription());
         this.setStartDate(project.getStartDate());
@@ -63,5 +66,13 @@ public class ProjectResponse {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

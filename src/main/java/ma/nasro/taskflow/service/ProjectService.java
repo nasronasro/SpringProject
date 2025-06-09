@@ -1,6 +1,7 @@
 package ma.nasro.taskflow.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ public interface ProjectService {
     //create a new project
     public void createProject(Project project);
     public List<Project> ListAllProjects();
+    public Project findProjectById(Long id);
 }
 
  
