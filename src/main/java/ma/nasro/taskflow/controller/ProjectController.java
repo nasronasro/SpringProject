@@ -44,7 +44,7 @@ public class ProjectController {
             return "project/add"; // Return to the form page
         }
         
-        projectService.createProject(projectDto.ProjectDtoToProject());
+        projectService.createProject(projectDto.ProjectRequestToProject());
 
         // Redirect to a different page after successful 
         return "redirect:/project-management/list";
@@ -75,5 +75,44 @@ public class ProjectController {
         model.addAttribute("project", projectResponse);
 
         return "project/details";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editProject(@PathVariable("id") Long projectId, Model model) {
+        if (projectId == null || projectId <= 0) {
+            model.addAttribute("error", "Invalid project ID");
+            return "error";
+        }
+
+        Project project = projectService.findProjectById(projectId);
+        if (project == null) {
+            model.addAttribute("error", "Project not found");
+            return "error";
+        }
+
+        ProjectResponse projectResponse = new ProjectResponse();
+        projectResponse.ProjectToProjectResponse(project);
+        model.addAttribute("projectForm", projectResponse);
+
+        return "project/edit";
+    }
+    @PostMapping("/edit/{id}")
+    public String editProject(@PathVariable("id") Long projectId, 
+                             @ModelAttribute("projectForm") ProjectResponse projectDto, 
+                             BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("Validation errors: " + bindingResult.getAllErrors());
+            return "project/edit"; // Return to the form page
+        }
+
+        Project project = projectService.findProjectById(projectId);
+        if (project == null) {
+            model.addAttribute("error", "Project not found");
+            return "error";
+        }
+
+        projectService.ModifyProject(projectDto.ProjectResponseToProject());
+
+        return "redirect:/project-management/list";
     }
 }

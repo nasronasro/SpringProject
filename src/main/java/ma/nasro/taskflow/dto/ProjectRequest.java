@@ -19,7 +19,7 @@ public class ProjectRequest {
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    public Project ProjectDtoToProject() {
+    public Project ProjectRequestToProject() {
         Project project = new Project();
         project.setName(this.getName());
         project.setDescription(this.getDescription());
@@ -28,6 +28,13 @@ public class ProjectRequest {
         // Set default status for the project
         project.setStatus("Pending");
         return project;
+    }
+    public ProjectRequest ProjectToProjectRequest(Project project) {
+        this.setName(project.getName());
+        this.setDescription(project.getDescription());
+        this.setStartDate(project.getStartDate());
+        this.setEndDate(project.getEndDate());
+        return this;
     }
 
     public String getName() {

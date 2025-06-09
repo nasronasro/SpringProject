@@ -54,6 +54,15 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Project not found with ID: " + id));
     }
-
+    @Override
+    public void ModifyProject(Project project) {
+        if (project == null || project.getId() == null) {
+            throw new IllegalArgumentException("Project or Project ID cannot be null");
+        }
+        if (!projectDao.existsById(project.getId())) {
+            throw new IllegalArgumentException("Project not found with ID: " + project.getId());
+        }
+        projectDao.save(project);
+    }
     
 }

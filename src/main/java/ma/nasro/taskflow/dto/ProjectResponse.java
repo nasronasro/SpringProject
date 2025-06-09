@@ -1,8 +1,6 @@
 package ma.nasro.taskflow.dto;
 
 import java.util.List;
-import java.util.Optional;
-
 import ma.nasro.taskflow.model.Project;
 
 public class ProjectResponse {
@@ -13,7 +11,17 @@ public class ProjectResponse {
     private String endDate;
     private String status;
 
-
+    public Project ProjectResponseToProject() {
+        Project project = new Project();
+        project.setId(this.getId());
+        project.setName(this.getName());
+        project.setDescription(this.getDescription());
+        project.setStartDate(this.getStartDate());
+        project.setEndDate(this.getEndDate());
+        project.setStatus(this.getStatus());
+        return project;
+    }
+    
     public ProjectResponse ProjectToProjectResponse(Project project) {
         this.setId(project.getId());
         this.setName(project.getName());
@@ -23,6 +31,7 @@ public class ProjectResponse {
         this.setStatus(project.getStatus());
         return this;
     }
+
     public List<ProjectResponse> ProjectListToProjectResponseList(List<Project> projects) {
         return projects.stream()
                 .map(project -> new ProjectResponse().ProjectToProjectResponse(project))

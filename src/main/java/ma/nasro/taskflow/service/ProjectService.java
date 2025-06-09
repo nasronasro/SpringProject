@@ -14,6 +14,7 @@ public interface ProjectService {
     public void createProject(Project project);
     public List<Project> ListAllProjects();
     public Project findProjectById(Long id);
+    public void ModifyProject(Project project);
 }
 
  
