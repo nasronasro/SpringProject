@@ -1,5 +1,7 @@
 package ma.nasro.taskflow.service.ProjectServiceImplimentations;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import ma.nasro.taskflow.dao.ProjectDao;
@@ -25,6 +27,22 @@ public class ProjectServiceImpl implements ProjectService {
         }
         
         projectDao.save(project);
+    }
+    
+    @Override
+    public List<Project> ListAllProjects() {
+        if (projectDao == null) {
+            throw new IllegalStateException("ProjectDao is not initialized");
+        }
+        if (projectDao.findAll() == null) {
+            throw new IllegalStateException("No projects found");
+        }
+        // Fetch all projects from the database
+        if (projectDao.findAll().isEmpty()) {
+            throw new IllegalStateException("No projects found in the database");
+        }
+
+        return projectDao.findAll();
     }
 
     

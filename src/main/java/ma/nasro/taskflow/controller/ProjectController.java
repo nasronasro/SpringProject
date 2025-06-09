@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ma.nasro.taskflow.dto.ProjectDto;
+
+import ma.nasro.taskflow.dto.ProjectRequest;
+import ma.nasro.taskflow.dto.ProjectResponse;
 import ma.nasro.taskflow.service.ProjectService;
 
 
@@ -24,12 +26,12 @@ public class ProjectController {
 
     @GetMapping("/add")
     public String createProject(Model model) {
-        model.addAttribute("projectForm", new ProjectDto());
+        model.addAttribute("projectForm", new ProjectRequest());
         return "project/add";
     }
 
      @PostMapping("/add")
-    public String addProject( @ModelAttribute("projectDto") ProjectDto projectDto, 
+    public String addProject( @ModelAttribute("projectDto") ProjectRequest projectDto, 
                              BindingResult bindingResult,
                              Model model) { 
 
@@ -44,8 +46,16 @@ public class ProjectController {
         System.out.println("Project created successfully: " + projectDto.getName());
 
         // Redirect to a different page after successful 
-        return "redirect:/projects/list";
+        return "redirect:/project-management/list";
     }
     
+    @GetMapping("/list")
+    public String listProjects(Model model) {
+        ProjectResponse projectResponse = new ProjectResponse();
+
+        model.addAttribute("projects", projectResponse.ProjectListToProjectResponseList( projectService.ListAllProjects()));
+
+        return "project/list";
+    }
 
 }

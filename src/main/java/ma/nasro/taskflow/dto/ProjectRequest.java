@@ -2,17 +2,17 @@ package ma.nasro.taskflow.dto;
 
 import ma.nasro.taskflow.model.Project;
 
-public class ProjectDto {
+public class ProjectRequest {
 
     private String name;
     private String description;
     private String startDate;
     private String endDate;
 
-    public ProjectDto() {
+    public ProjectRequest() {
     }
 
-    public ProjectDto( String name, String description, String startDate, String endDate) {
+    public ProjectRequest( String name, String description, String startDate, String endDate) {
  
         this.name = name;
         this.description = description;
