@@ -5,6 +5,6 @@ import java.util.List;
 import ma.nasro.taskflow.model.Task;
 
 public interface TaskService {
-
-    List<Task> listAllTasks();
+    List<Task> listAllTasks(Long projectId);
+    void createTask(Task task, Long projectId);
 }
