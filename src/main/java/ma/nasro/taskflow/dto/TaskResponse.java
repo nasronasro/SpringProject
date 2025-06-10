@@ -1,57 +1,52 @@
-package ma.nasro.taskflow.model;
+package ma.nasro.taskflow.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@Entity
-public class Task {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import ma.nasro.taskflow.model.Project;
+import ma.nasro.taskflow.model.Task;
+
+public class TaskResponse {
     private Long id;
-    @Column(nullable = false, length = 100)
     private String title;
-    @Column(nullable = false, length = 500)
     private String content;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id", nullable = false)
     private Project project;
     private String dateDuo;
     private int priority;
 
+    public TaskResponse FromTaskToTaskResponse(Task task) {
+        this.id = task.getId();
+        this.title = task.getTitle();
+        this.content = task.getContent();
+        this.project = task.getProject();
+        this.dateDuo = task.getDateDuo();
+        this.priority = task.getPriority();
+        return this;
+    }
+    
+    public List<TaskResponse> TaskListToTaskResponseList(List<Task> tasks) {
+        return tasks.stream()
+                .map(task -> new TaskResponse().FromTaskToTaskResponse(task))
+                .collect(Collectors.toList());
+    }
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
-
     public String getContent() {
         return content;
     }
-
     public void setContent(String content) {
         this.content = content;
     }
-
     public String getDateDuo() {
         return dateDuo;
     }
-
     public void setDateDuo(String dateDuo) {
         this.dateDuo = dateDuo;
     }
@@ -59,7 +54,6 @@ public class Task {
     public int getPriority() {
         return priority;
     }
-
     public void setPriority(int priority) {
         this.priority = priority;
     }
@@ -71,4 +65,5 @@ public class Task {
     public void setProject(Project project) {
         this.project = project;
     }
+
 }

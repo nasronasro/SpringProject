@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<head>
+    <title>Taskflow - Task List</title>
+    <th:block layout:fragment="pageCss">
+        <link href="/css/list.css" rel="stylesheet">
+    </th:block>
+</head>
+<body>
+
+    <div layout:fragment="content">
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card p-4 shadow-lg card-dark-mode">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-4 text-primary">All Tasks</h2>
+
+                            <div th:if="${tasks.isEmpty()}" class="alert alert-info text-center" role="alert">
+                                No tasks found. Start by <a th:href="@{/task-management/add}" class="alert-link">adding a new task</a>!
+                            </div>
+
+                            <div th:unless="${tasks.isEmpty()}" class="table-responsive">
+                                <table class="table table-dark table-striped table-hover text-center align-middle custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Content</th>
+
+                                            <th scope="col">Due Date</th>
+                                            <th scope="col">Priority</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="task, i : ${tasks}">
+                                            <th scope="row" th:text="${i.index + 1}">1</th>
+                                            <td th:text="${task.title}">Task Title</td>
+                                            <td th:text="${task.content}">Task content goes here.</td>
+                                            <td th:text="${task.dateDuo}">2025-07-31</td>
+                                            <td>
+                                                <span th:classappend="${task.priority == 1 ? 'badge bg-danger' : task.priority == 2 ? 'badge bg-warning text-dark' : 'badge bg-info'}" th:text="${task.priority}">3</span>
+                                            </td>
+                                            <td>
+                                                <a th:href="@{/task-management/details/{id}(id=${task.id})}" class="btn btn-sm btn-outline-primary me-2">Details</a>
+                                                <a th:href="@{/task-management/edit/{id}(id=${task.id})}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                                                <a th:href="@{/task-management/delete/{id}(id=${task.id})}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center mt-4">
+                                <a th:href="@{/task-management/add}" class="btn btn-success btn-lg">Add New Task</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
