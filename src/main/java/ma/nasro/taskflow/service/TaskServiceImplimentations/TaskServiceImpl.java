@@ -57,5 +57,15 @@ public class TaskServiceImpl implements  TaskService {
         return taskDao.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Task not found with ID: " + taskId));
     }
+    @Override
+    public void deleteTask(Long taskId) {
+        if (taskId == null || taskId <= 0) {
+            throw new IllegalArgumentException("Invalid task ID");
+        }
+        
+        Task task = taskDao.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found with ID: " + taskId));
+        taskDao.delete(task);
+    }
     
 }

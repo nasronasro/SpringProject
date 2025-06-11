@@ -73,4 +73,15 @@ public class TaskController {
         model.addAttribute("task", taskResponse.FromTaskToTaskResponse(taskService.getTaskById(id)));
         return "task/details";
     }
+    @GetMapping("/delete/{id}")
+    public String deleteTask(@PathVariable("id") Long id, @PathVariable("projectId")Long  projectId, Model model) {
+        try {
+            taskService.deleteTask(id);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "task/list"; // Return to the list page with error
+        }
+        
+        return "redirect:/project-management/" + projectId + "/tasks/list";
+    }
 }

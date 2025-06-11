@@ -9,4 +9,5 @@ public interface TaskService {
     void createTask(Task task, Long projectId);
     void updateTask(Task task,Long projectId);
     Task getTaskById(Long taskId);
+    void deleteTask(Long taskId);
 }
