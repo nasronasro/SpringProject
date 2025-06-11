@@ -3,14 +3,13 @@ package ma.nasro.taskflow.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ma.nasro.taskflow.model.Project;
 import ma.nasro.taskflow.model.Task;
 
 public class TaskResponse {
     private Long id;
     private String title;
     private String content;
-    private Project project;
+    private Long projectId;
     private String dateDuo;
     private int priority;
 
@@ -18,7 +17,7 @@ public class TaskResponse {
         this.id = task.getId();
         this.title = task.getTitle();
         this.content = task.getContent();
-        this.project = task.getProject();
+        this.projectId = task.getProject().getId();
         this.dateDuo = task.getDateDuo();
         this.priority = task.getPriority();
         return this;
@@ -28,6 +27,15 @@ public class TaskResponse {
         return tasks.stream()
                 .map(task -> new TaskResponse().FromTaskToTaskResponse(task))
                 .collect(Collectors.toList());
+    }
+    public Task FromTaskResponseToTask() {
+        Task task = new Task();
+        task.setId(this.id);
+        task.setTitle(this.title);
+        task.setContent(this.content);
+        task.setDateDuo(this.dateDuo);
+        task.setPriority(this.priority);
+        return task;
     }
     public Long getId() {
         return id;
@@ -58,12 +66,14 @@ public class TaskResponse {
         this.priority = priority;
     }
 
-    public Project getProject() {
-        return project;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
+
+
 
 }

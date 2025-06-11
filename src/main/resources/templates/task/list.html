@@ -38,11 +38,11 @@
                                             <span th:classappend="${task.priority == 1 ? 'badge bg-danger' : task.priority == 2 ? 'badge bg-warning text-dark' : 'badge bg-info'}" th:text="${task.priority}">3</span>
                                         </td>
                                         <td>
-                                            <!--
-                                            <a th:href="@{/tasks/details/{id}(id=${task.id})}" class="btn btn-sm btn-outline-primary me-2">Details</a>
-                                            <a th:href="@{/tasks/edit/{id}(id=${task.id})}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
-                                            <a th:href="@{/tasks/delete/{id}(id=${task.id})}" class="btn btn-sm btn-outline-danger">Delete</a>
-                                            -->
+                                            
+                                            <a th:href="@{/project-management/{projectId}/tasks/details/{taskId}(projectId=${projectId}, taskId=${task.id})}" class="btn btn-sm btn-outline-primary me-2">Details</a>
+                                            <a th:href="@{/project-management/{projectId}/tasks/edit/{taskId}(projectId=${projectId}, taskId=${task.id})}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                                            <a th:href="@{/project-management/{projectId}/tasks/delete/{taskId}(projectId=${projectId}, taskId=${task.id})}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                            
                                         </td>
                                     </tr>
                                 </tbody>

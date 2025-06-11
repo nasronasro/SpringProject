@@ -13,4 +13,5 @@ public interface TaskDao extends JpaRepository<Task, Long> {
 
     @Query("SELECT t FROM Task t WHERE t.project.id = :projectId")
     List<Task> findTasksByProjectId(@Param("projectId") Long projectId);
+    
 }

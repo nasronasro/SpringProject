@@ -7,4 +7,6 @@ import ma.nasro.taskflow.model.Task;
 public interface TaskService {
     List<Task> listAllTasks(Long projectId);
     void createTask(Task task, Long projectId);
+    void updateTask(Task task,Long projectId);
+    Task getTaskById(Long taskId);
 }

@@ -12,8 +12,8 @@ import ma.nasro.taskflow.service.TaskService;
 
 @Service
 public class TaskServiceImpl implements  TaskService {
-    private TaskDao taskDao;
-    private ProjectDao projectDao;
+    private final TaskDao taskDao;
+    private final ProjectDao projectDao;
     public TaskServiceImpl(TaskDao taskDao,ProjectDao projectDao) {
         this.taskDao = taskDao;
         this.projectDao = projectDao;
@@ -35,9 +35,27 @@ public class TaskServiceImpl implements  TaskService {
         if (task == null || task.getTitle() == null || task.getContent() == null) {
             throw new IllegalArgumentException("Task title and content cannot be null");
         }
-        Project project = projectDao.getById(projectId); 
+        Project project = projectDao.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found with ID: " + projectId)); 
         task.setProject(project);
         taskDao.save(task);
+    }
+    @Override
+    public void updateTask(Task task,Long projectId) {
+        if (task == null || task.getId() == null) {
+            throw new IllegalArgumentException("Task ID and project ID cannot be null");
+        }
+        task.setProject(projectDao.findById(projectId)
+                .orElseThrow(() -> new RuntimeException("Project not found with ID: " + projectId)));
+        taskDao.save(task);
+    }
+    @Override
+    public Task getTaskById(Long taskId) {
+        if (taskId == null || taskId <= 0) {
+            throw new IllegalArgumentException("Invalid task ID");
+        }
+        
+        return taskDao.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found with ID: " + taskId));
     }
     
 }

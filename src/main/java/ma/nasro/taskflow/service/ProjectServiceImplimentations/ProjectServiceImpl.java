@@ -34,9 +34,6 @@ public class ProjectServiceImpl implements ProjectService {
         if (projectDao == null) {
             throw new IllegalStateException("ProjectDao is not initialized");
         }
-        if (projectDao.findAll() == null) {
-            throw new IllegalStateException("No projects found");
-        }
         // Fetch all projects from the database
         if (projectDao.findAll().isEmpty()) {
             throw new IllegalStateException("No projects found in the database");
