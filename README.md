@@ -75,5 +75,5 @@ TaskFlow is built following modern Spring Boot best practices to ensure maintain
     
 ## 📞 Contact
 
-- Belarbi nasreddine - [My Email](belarbi.nasrddine@gmail.com)
+- Belarbi nasreddine - belarbi.nasrddine@gmail.com
 - Project Link: [/nasronasro/SpringProject](https://github.com/nasronasro/SpringProject) 
