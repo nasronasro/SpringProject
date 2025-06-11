@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<head>
+    <title>Taskflow - Add New Task</title>
+    <link href="/css/form.css" rel="stylesheet">
+    
+    <th:block layout:fragment="pageCss"></th:block>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card p-4 shadow-lg card-dark-mode">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-4 text-primary">Add New Task</h2>
+                            <form th:action="@{/project-management/{projectId}/tasks/add(projectId=${projectId})}" th:object="${taskForm}" method="post">
+            
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Task Title</label>
+                                    <input type="text" class="form-control form-control-dark" id="title" th:field="*{title}" placeholder="e.g., Complete report" required>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="content" class="form-label">Content</label>
+                                    <textarea class="form-control form-control-dark" id="content" th:field="*{content}" rows="3" placeholder="Provide details for the task"></textarea>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="dateDuo" class="form-label">Due Date</label>
+                                    <input type="date" class="form-control form-control-dark" id="dateDuo" th:field="*{dateDuo}" required>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('dateDuo')}" th:errors="*{dateDuo}"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="priority" class="form-label">Priority</label>
+                                    <select class="form-select form-control-dark" id="priority" th:field="*{priority}" required>
+                                        <option value="1">1 - High</option>
+                                        <option value="2">2 - Medium</option>
+                                        <option value="3">3 - Low</option>
+                                    </select>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}"></div>
+                                </div>
+
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">Add Task</button>
+                                    <a th:href="@{project-management/{${projectId}}/tasks/list}" class="btn btn-outline-secondary btn-lg">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

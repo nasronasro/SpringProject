@@ -1,0 +1,44 @@
+/* Custom styles for the project details page */
+
+/* Adjust alignment on small screens for better readability */
+@media (max-width: 575.98px) {
+    .row .col-sm-4.text-sm-end.text-start {
+        text-align: start !important; /* Force labels to left align on small screens */
+    }
+    .row .col-sm-8.text-sm-start.text-end {
+        text-align: start !important; /* Force values to left align on small screens */
+    }
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #ced4da; /* Light color for labels */
+}
+
+.detail-value {
+    color: #e2e6ea; /* Light color for values */
+    word-wrap: break-word; /* Ensure long descriptions wrap */
+    white-space: pre-wrap; /* Preserve line breaks in description if they exist */
+}
+
+.status-badge-lg {
+    padding: 0.6em 1em;
+    font-size: 1em;
+    min-width: 100px; /* Give badges a consistent minimum width */
+    display: inline-block; /* Allow text-align to work on it */
+    text-align: center; /* Center text within the badge */
+}
+
+/* Inherit badge colors from list.css or redefine if list.css is not globally included */
+.badge.bg-success { /* COMPLETED */
+    background-color: #28a745 !important;
+    color: #fff;
+}
+.badge.bg-warning { /* IN_PROGRESS */
+    background-color: #ffc107 !important;
+    color: #212529; /* Dark text for warning background */
+}
+.badge.bg-info { /* PENDING or other status */
+    background-color: #17a2b8 !important;
+    color: #fff;
+}

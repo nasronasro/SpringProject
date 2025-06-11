@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}"> <head>
+    <title>Taskflow - Home Page</title>
+    <th:block layout:fragment="pageCss">
+        <style>
+            /* Example: Home page specific styles */
+            .welcome-section {
+                padding: 60px 0;
+                background-color: #f8f9fa;
+                border-bottom: 1px solid #e9ecef;
+            }
+        </style>
+    </th:block>
+</head>
+<body>
+
+    <div layout:fragment="content"> <section class="welcome-section text-center">
+            <div class="container">
+                <h1 class="display-4">Welcome to Taskflow!</h1>
+                <p class="lead" th:text="${message}">Your tasks, beautifully organized.</p>
+                <a th:href="@{/tasks}" class="btn btn-primary btn-lg mt-3">Start Managing Your Tasks</a>
+            </div>
+        </section>
+
+        <section class="features-section my-5">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="card p-4 shadow-sm">
+                            <i class="bi bi-list-task display-4 text-primary mb-3"></i>
+                            <h3 class="card-title">Task Management</h3>
+                            <p class="card-text">Create, assign, and track tasks with ease. Never miss a deadline again.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-4 shadow-sm">
+                            <i class="bi bi-folder-fill display-4 text-primary mb-3"></i>
+                            <h3 class="card-title">Project Organization</h3>
+                            <p class="card-text">Group tasks into projects and manage your larger goals effectively.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-4 shadow-sm">
+                            <i class="bi bi-people-fill display-4 text-primary mb-3"></i>
+                            <h3 class="card-title">Team Collaboration</h3>
+                            <p class="card-text">Work seamlessly with your team, share updates, and achieve goals together.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block layout:fragment="pageJs">
+        <script>
+            // Example: Home page specific script
+            console.log("Home page script loaded.");
+        </script>
+    </th:block>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<head>
+    <title>Taskflow - Task Details</title>
+    <th:block layout:fragment="pageCss">
+        <link href="/css/form.css" rel="stylesheet">
+        <link href="/css/details.css" rel="stylesheet">
+        </th:block>
+</head>
+<body>
+
+    <div layout:fragment="content">
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-md-9 col-lg-8">
+                    <div class="card p-4 shadow-lg card-dark-mode">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-4 text-primary" th:text="${task.title}">Task Title Placeholder</h2>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-4 text-sm-end text-start">
+                                    <strong class="detail-label">Task ID:</strong>
+                                </div>
+                                <div class="col-sm-8 text-sm-start text-end">
+                                    <span class="detail-value" th:text="${task.id}">123</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-4 text-sm-end text-start">
+                                    <strong class="detail-label">Content:</strong>
+                                </div>
+                                <div class="col-sm-8 text-sm-start text-end">
+                                    <span class="detail-value" th:text="${task.content}">Detailed description of the task.</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-4 text-sm-end text-start">
+                                    <strong class="detail-label">Due Date:</strong>
+                                </div>
+                                <div class="col-sm-8 text-sm-start text-end">
+                                    <span class="detail-value" th:text="${task.dateDuo}">2025-12-31</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-4 text-sm-end text-start">
+                                    <strong class="detail-label">Priority:</strong>
+                                </div>
+                                <div class="col-sm-8 text-sm-start text-end">
+                                    <span th:classappend="${task.priority == 1 ? 'badge bg-danger' : task.priority == 2 ? 'badge bg-warning text-dark' : 'badge bg-info'}"
+                                          th:text="${task.priority == 1 ? 'High' : task.priority == 2 ? 'Medium' : 'Low'}">Medium</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-sm-4 text-sm-end text-start">
+                                    <strong class="detail-label">Project ID:</strong>
+                                </div>
+                                <div class="col-sm-8 text-sm-start text-end">
+                                    <span class="detail-value" th:text="${task.projectId}">456</span>
+                                </div>
+                            </div>
+
+                            <hr class="my-4 border-secondary">
+
+                            <div class="d-flex flex-wrap justify-content-center gap-3">
+                                <a th:href="@{/project-management/{projectId}/tasks/edit/{taskId}(projectId=${task.projectId}, taskId=${task.id})}" class="btn btn-outline-primary btn-lg">
+                                    <i class="bi bi-pencil-square me-2"></i>Edit Task
+                                </a>
+                                <a th:href="@{/project-management/{projectId}/tasks/delete/{taskId}(projectId=${task.projectId}, taskId=${task.id})}" class="btn btn-outline-danger btn-lg">
+                                    <i class="bi bi-trash-fill me-2"></i>Delete Task
+                                </a>
+                                <a th:href="@{/project-management/{projectId}/tasks/list(projectId=${task.projectId})}" class="btn btn-outline-secondary btn-lg">
+                                    <i class="bi bi-arrow-left me-2"></i>Back to Tasks
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
